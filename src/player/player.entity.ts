@@ -7,7 +7,4 @@ export class Player {
 
   @Column()
   nickname: string;
-
-  @Column({ unique: true })
-  joinCode: string;
 }
