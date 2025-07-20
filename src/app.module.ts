@@ -9,9 +9,14 @@ import { QuizModule } from './quiz/quiz.module';
 import { Quiz } from './quiz/quiz.entity';
 import { Question } from './quiz/question.entity';
 import { Option } from './quiz/option.entity';
+import { ConfigModule } from '@nestjs/config';
+
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true, // 👈 Loads .env and makes ConfigService global
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -19,7 +24,7 @@ import { Option } from './quiz/option.entity';
       username: 'postgres',
       password: 'root',
       database: 'mydb',
-      entities: [User, Player, Quiz, Question, Option], // ✅ Add these
+      entities: [User, Player, Quiz, Question, Option],
       synchronize: true,
     }),
     AuthModule,
@@ -29,3 +34,4 @@ import { Option } from './quiz/option.entity';
   ],
 })
 export class AppModule {}
+

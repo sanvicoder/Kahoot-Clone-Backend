@@ -10,8 +10,8 @@ export class Question {
   @Column()
   text: string;
 
-  @Column({ nullable: true })
-  image: string;
+@Column({ nullable: true, type: 'text' }) // optional: `type: 'text'` for long strings
+image: string | null;
 
   @Column({ default: 30 })
   timeLimit: number;
@@ -19,6 +19,7 @@ export class Question {
   @ManyToOne(() => Quiz, quiz => quiz.questions, { onDelete: 'CASCADE' })
   quiz: Quiz;
 
-  @OneToMany(() => Option, option => option.question, { cascade: true })
-  options: Option[];
+ @OneToMany(() => Option, option => option.question, { cascade: true, eager: true })
+options: Option[];
+
 }

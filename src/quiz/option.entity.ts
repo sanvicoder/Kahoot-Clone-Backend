@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { Question } from './question.entity';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class Option {
@@ -15,6 +16,7 @@ export class Option {
   @Column()
   color: string;
 
+  @Exclude()
   @ManyToOne(() => Question, question => question.options, { onDelete: 'CASCADE' })
   question: Question;
 }
